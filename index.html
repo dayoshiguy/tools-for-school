@@ -5,31 +5,51 @@
         <title>Schoology Viewer</title>
     </head>
     <body>
-    <pre id="pre"></pre>
+<button type="button" id="aday" onclick="setDay('a');">A day</button>
+<button type="button" id="bday" onclick="setDay('b');">B day</button>
+<button type="button" id="closeall" onclick="closeChildWindows();">Close All Popups</button>
+<pre id="pre"></pre>
 <script>
+const width=window.innerWidth;//dimensions of original window
+const height=window.innerHeight;
+var windowDimensions=[width/2,height/3];//width,height
 var classlinks=[["https://popejohn.schoology.com/course/2733731073/materials","https://popejohn.schoology.com/course/2733732062/materials","https://popejohn.schoology.com/course/2733731052/materials","https://popejohn.schoology.com/course/2733732005/materials"],["https://popejohn.schoology.com/course/2733733061/materials","https://popejohn.schoology.com/course/2733732133/materials","https://popejohn.schoology.com/course/2733732990/materials","https://popejohn.schoology.com/course/2733733065/materials"]]//put ur a and b day links here
 
+//for the ability to close the windows
+var childWindowHandles = new Array();
+function openNewWindow(url, params) {
+    childWindowHandles[childWindowHandles.length] = window.open(url, '', params);
+}
+function closeChildWindows() {
+    for (var i=0; i<childWindowHandles.length; i++) 
+    {
+        if (!childWindowHandles[i].closed)
+        {
+            childWindowHandles[i].close();
+        }
+    }
+}
+//////////////////////////////////////
 function setDay(day){
-  switch(day){
-   case "a":
-   	for(i=0;i<4;i++){
-    document.getElementById("p"+(i+1)).src=classlinks[0][i];
+	switch(day){
+  case "a":
+  closeChildWindows();//close previously opened windows
+  	for(y=0;y<2;y++){
+      for(x=0;x<2;x++){
+      openNewWindow(classlinks[0][y*2+x],"width="+windowDimensions[0]+",height="+windowDimensions[1]+",top="+(y+1)*(windowDimensions[1])+",left="+x*windowDimensions[0]);
+      }
     }
     break;
-   case "b":
-		for(i=0;i<4;i++){
-    document.getElementById("p"+(i+1)).src=classlinks[1][i];
+	case "b":
+		closeChildWindows();//close previously opened windows
+  	for(y=0;y<2;y++){
+      for(x=0;x<2;x++){
+      openNewWindow(classlinks[1][y*2+x],"width="+windowDimensions[0]+",height="+windowDimensions[1]+",top="+(y+1)*(windowDimensions[1])+",left="+x*windowDimensions[0]);
+      }
     }
   }
 }
+
 </script>
-<button type="button" id="aday" onclick="setDay('a');">A day</button>
-<button type="button" id="bday" onclick="setDay('b');">B day</button>
-<br>
-<iframe id="p1"></iframe>
-<iframe id="p2"></iframe>
-<br>
-<iframe id="p3"></iframe>
-<iframe id="p4"></iframe>
     </body>
 </html>
