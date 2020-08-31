@@ -9,7 +9,7 @@
         <title>epic</title>
     </head>
     <body>
-        
+          <button type="button" id="switch" onclick="if(day=='A'){day='B';}else{day='A';}">Switch day</button>
 <pre id="time"></pre>
 <button type="button" id="aday" onclick="setDay('a');">A day</button>
 <button type="button" id="bday" onclick="setDay('b');">B day</button>
@@ -17,6 +17,7 @@
 <pre id="pre"></pre>
 <script>
 //Current Time and Time Left
+var day="A";
 var endTime=[470,560,644,678,708,792,876];//7:50,9:20,10:44,11:18,11:48,1:12(13:12),2:36(14:36)
 var classes=[[//A day classes
 								"Homeroom: Room 201",
@@ -56,9 +57,11 @@ function getNext(time,n){//0=return end time,1=return time left,2 to return curr
         	return minsToHours(endTime[i]-currTime);
         	break;
         case 2:
-        	//if(document.getElementById("whichDay").checked){
+        	if(day=="A"){
           	return "\nCurrent Class: "+classes[0][i]+"\nNext Class: "+classes[0][i+1];
-          //}
+          }else if(day=="B"){
+          	return "\nCurrent Class: "+classes[1][i]+"\nNext Class: "+classes[1][i+1];
+          }
       }
       break;
     }
@@ -67,22 +70,8 @@ function getNext(time,n){//0=return end time,1=return time left,2 to return curr
 setInterval(function(){
   var date=new Date();
   var secondsLeft=60-1-date.getSeconds();
-  document.getElementById("time").innerHTML="Time: "+date.toLocaleTimeString()+getNext(date,2)+"\nClass ends at: "+getNext(date,0)+"\nTime Left: "+getNext(date,1)+":"+secondsLeft;
+  document.getElementById("time").innerHTML="Day: "+day+"\nTime: "+date.toLocaleTimeString()+getNext(date,2)+"\nClass ends at: "+getNext(date,0)+"\nTime Left: "+getNext(date,1)+":"+secondsLeft;
 }, 10);
-//for the ability to close the windows
-var childWindowHandles = new Array();
-function openNewWindow(url, params) {
-    childWindowHandles[childWindowHandles.length] = window.open(url, '', params);
-}
-function closeChildWindows() {
-    for (var i=0; i<childWindowHandles.length; i++) 
-    {
-        if (!childWindowHandles[i].closed)
-        {
-            childWindowHandles[i].close();
-        }
-    }
-}
 //////////////////////////////////////
 function setDay(day){
 	switch(day){
