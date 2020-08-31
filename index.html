@@ -1,25 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html><style>
+      /*i cba to make css so this is from here: https://proto.io/freebies/onoff/*/
+      .onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "A Day";
+    padding-left: 10px;
+    background-color: #34A7C1; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "B Day";
+    padding-right: 10px;
+    background-color: #ED3D3D; color: #FFFFFF;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 10px; margin: 10px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 56px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+/*this the rest isnt stolen*/
+#time {
+  font-size: 14px; color: #999999; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+}
+</style>
+    <div class="onoffswitch">
+    <input type="checkbox" id="whichDay" name="onoffswitch" class="onoffswitch-checkbox" tabindex="0" checked>
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div>
     <head>
         <meta charset="utf-8">
-        <title>Luke's Epic SchoolTools</title>
+        <title>epic</title>
     </head>
     <body>
+        
 <pre id="time"></pre>
 <button type="button" id="aday" onclick="setDay('a');">A day</button>
 <button type="button" id="bday" onclick="setDay('b');">B day</button>
 <button type="button" id="closeall" onclick="closeChildWindows();">Close All Popups</button>
 <pre id="pre"></pre>
 <script>
-/////////////////////////Current Time and Time Left/////////////////////////
+//Current Time and Time Left
 var endTime=[470,560,644,678,708,792,876];//7:50,9:20,10:44,11:18,11:48,1:12(13:12),2:36(14:36)
+var classes=[[//A day classes
+								"Homeroom: Room 201",
+                "English III: Room 102",
+                "Physics: Room 116",
+                "Advisory Period: Room 201",
+                "Lunch Period: Cafe",
+                "AP Computer Science: Room 214",
+                "Honors Pre-Calculus: Room 114",
+                "End"
+            ],[//B day classes
+            		"Homeroom: Room 402",
+                "Health/PE 11 12: New Gym",
+                "History of Great Trials: Room 204",
+                "Advisory Period: Room 402",
+                "Lunch Period: Cafe",
+                "Theology III: Room 210",
+                "US History II: Room 205",
+                "End"
+            ]];
 function min(time){
 	return time.getHours()*60+time.getMinutes();
 }
 function minsToHours(min){
 	return Math.floor(min/60)+":"+min%60;
 }
-function getNext(time,n){//0=return end time,1=return time left
+function getNext(time,n){//0=return end time,1=return time left,2 to return current and next class
 	var currTime=min(time);
   var nextEnd=-420;
   for(i=0;i<6;i++){
@@ -31,6 +111,10 @@ function getNext(time,n){//0=return end time,1=return time left
         case 1:
         	return minsToHours(endTime[i]-currTime);
         	break;
+        case 2:
+        	if(document.getElementById("whichDay").checked){
+          	return "\nCurrent Class: "+classes[0][i]+"\nNext Class: "+classes[0][i+1];
+          }
       }
       break;
     }
@@ -39,14 +123,8 @@ function getNext(time,n){//0=return end time,1=return time left
 setInterval(function(){
   var date=new Date();
   var secondsLeft=60-1-date.getSeconds();
-  document.getElementById("time").innerHTML="Time: "+date.toLocaleTimeString()+"\nClass ends at: "+getNext(date,0)+"\nTime Left: "+getNext(date,1)+":"+secondsLeft;
+  document.getElementById("time").innerHTML="Time: "+date.toLocaleTimeString()+getNext(date,2)+"\nClass ends at: "+getNext(date,0)+"\nTime Left: "+getNext(date,1)+":"+secondsLeft;
 }, 10);
-/////////////////////////Schoology Veiwer/////////////////////////
-const width=window.innerWidth;//dimensions of original window
-const height=window.innerHeight;
-var windowDimensions=[width/2,height/3];//width,height
-var classlinks=[["https://popejohn.schoology.com/course/2733731073/materials","https://popejohn.schoology.com/course/2733732062/materials","https://popejohn.schoology.com/course/2733731052/materials","https://popejohn.schoology.com/course/2733732005/materials"],["https://popejohn.schoology.com/course/2733733061/materials","https://popejohn.schoology.com/course/2733732133/materials","https://popejohn.schoology.com/course/2733732990/materials","https://popejohn.schoology.com/course/2733733065/materials"]]//put ur a and b day links here
-
 //for the ability to close the windows
 var childWindowHandles = new Array();
 function openNewWindow(url, params) {
