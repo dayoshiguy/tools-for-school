@@ -10,10 +10,10 @@
     </head>
     <body>
           <button type="button" id="switch" onclick="if(day=='A'){day='B';}else{day='A';}">Switch day</button>
-<pre id="time"></pre>
 <button type="button" id="aday" onclick="setDay('a');">A day</button>
 <button type="button" id="bday" onclick="setDay('b');">B day</button>
 <button type="button" id="closeall" onclick="closeChildWindows();">Close All Popups</button>
+        <pre id="time"></pre>
 <pre id="pre"></pre>
 <script>
 //Current Time and Time Left
@@ -70,7 +70,7 @@ function getNext(time,n){//0=return end time,1=return time left,2 to return curr
 setInterval(function(){
   var date=new Date();
   var secondsLeft=60-1-date.getSeconds();
-  document.getElementById("time").innerHTML="Day: "+day+"\nTime: "+date.toLocaleTimeString()+getNext(date,2)+"\nClass ends at: "+getNext(date,0)+"\nTime Left: "+getNext(date,1)+":"+secondsLeft;
+  document.getElementById("time").innerHTML="Day: "+day+"\tTime: "+date.toLocaleTimeString()+"\nClass ends at: "+getNext(date,0)+"\tTime Left: "+getNext(date,1)+":"+secondsLeft+getNext(date,2);
 }, 10);
 //////////////////////////////////////
 const width=window.innerWidth;//dimensions of original window
