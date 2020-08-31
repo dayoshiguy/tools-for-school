@@ -38,7 +38,7 @@ function getNext(time,n){//0=return end time,1=return time left
 }
 setInterval(function(){
   var date=new Date();
-  var secondsLeft=60-date.getSeconds();
+  var secondsLeft=60-1-date.getSeconds();
   document.getElementById("time").innerHTML="Time: "+date.toLocaleTimeString()+"\nClass ends at: "+getNext(date,0)+"\nTime Left: "+getNext(date,1)+":"+secondsLeft;
 }, 10);
 /////////////////////////Schoology Veiwer/////////////////////////
