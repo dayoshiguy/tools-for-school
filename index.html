@@ -73,6 +73,25 @@ setInterval(function(){
   document.getElementById("time").innerHTML="Day: "+day+"\nTime: "+date.toLocaleTimeString()+getNext(date,2)+"\nClass ends at: "+getNext(date,0)+"\nTime Left: "+getNext(date,1)+":"+secondsLeft;
 }, 10);
 //////////////////////////////////////
+const width=window.innerWidth;//dimensions of original window
+const height=window.innerHeight;
+var windowDimensions=[width/2,height/3];//width,height
+var classlinks=[["https://popejohn.schoology.com/course/2733731073/materials","https://popejohn.schoology.com/course/2733732062/materials","https://popejohn.schoology.com/course/2733731052/materials","https://popejohn.schoology.com/course/2733732005/materials"],["https://popejohn.schoology.com/course/2733733061/materials","https://popejohn.schoology.com/course/2733732133/materials","https://popejohn.schoology.com/course/2733732990/materials","https://popejohn.schoology.com/course/2733733065/materials"]]//put ur a and b day links here
+
+//for the ability to close the windows
+var childWindowHandles = new Array();
+function openNewWindow(url, params) {
+    childWindowHandles[childWindowHandles.length] = window.open(url, '', params);
+}
+function closeChildWindows() {
+    for (var i=0; i<childWindowHandles.length; i++) 
+    {
+        if (!childWindowHandles[i].closed)
+        {
+            childWindowHandles[i].close();
+        }
+    }
+}
 function setDay(day){
 	switch(day){
   case "a":
@@ -92,6 +111,7 @@ function setDay(day){
     }
   }
 }
+
 
 </script>
     </body>
