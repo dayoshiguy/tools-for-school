@@ -42,7 +42,7 @@
   setInterval(function(){
   	var txt=document.getElementById("txt").value;
   	setCookie("P",txt,30);//set cookie to innerHTML of textArea, expires in 1 day
-  },1000*30);
+  },1000);
   window.onbeforeunload = function(){
    setCookie("P",txt,30);//update cookie when page is closed https://stackoverflow.com/a/13443562
 	}
