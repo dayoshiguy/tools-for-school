@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,7 +34,7 @@
   var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: \n";
   
   //check cookie and make it cookie if not blank
-  if(getCookie("P") === ""){
+  if(getCookie("P") == ""||getCookie("P")=="[object HTMLTextAreaElement]"){
   	document.getElementById("txt").value=Default;
   }else{
   	document.getElementById("txt").value=getCookie("P");
