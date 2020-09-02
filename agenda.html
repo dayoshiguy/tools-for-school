@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,13 +34,14 @@
   
   //check cookie and make it cookie if not blank
   if(getCookie("P") == ""||getCookie("P")=="[object HTMLTextAreaElement]"){
-  	document.getElementById("txt").value=Default;
+  	document.getElementById("txt").innerHTML=Default;
   }else{
-  	document.getElementById("txt").value=getCookie("P");
+  	document.getElementById("txt").innerHTML=getCookie("P");
   }
   //regularly update cookie (every minute)
   setInterval(function(){
   	var txt=document.getElementById("txt").value;
+    txt=txt.replace(/\r\n|\r|\n/g,"</br>");
   	setCookie("P",txt,30);//set cookie to innerHTML of textArea, expires in 1 day
   },1000);
   window.onbeforeunload = function(){
