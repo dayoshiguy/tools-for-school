@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,18 +34,18 @@
   var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: \n";
   
   //check cookie and make it cookie if not blank
-  if(getCookie("P") !== ""&&getCookie("P")){
+  if(getCookie("P") !== ""&&getCookie("P") !== Default){
   	document.getElementById("txt").innerHTML=getCookie("P");
   }else{
   	document.getElementById("txt").innerHTML=Default;
   }
   //regularly update cookie (every minute)
   setInterval(function(){
-  	var txt=document.getElementById("txt").innerHTML;
-  	setCookie("P",txt,1);//set cookie to innerHTML of textArea, expires in 1 day
+  	var txt=document.getElementById("txt");
+  	setCookie("P",txt.innerHTML,30);//set cookie to innerHTML of textArea, expires in 1 day
   },1000*60);
   window.onbeforeunload = function(){
-   setCookie("P",txt,1);//update cookie when page is closed https://stackoverflow.com/a/13443562
+   setCookie("P",txt.innerHTML,30);//update cookie when page is closed https://stackoverflow.com/a/13443562
 	}
   </script>
   
