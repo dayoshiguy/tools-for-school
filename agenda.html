@@ -9,9 +9,9 @@
   <script>  
   var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: \n";
   
-  //check cookie and make it cookie if not blank
-  if(localStorage.getItem("P") == ""||localStorage.getItem("P")=="[object HTMLTextAreaElement]"){
+  if(localStorage.getItem("P") == ""){
   	document.getElementById("txt").value=Default;
+    localStorage.setItem("P")=Default;
   }else{
   	document.getElementById("txt").value=localStorage.getItem("P");
   }
