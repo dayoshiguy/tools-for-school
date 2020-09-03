@@ -9,7 +9,7 @@
   <script>  
   var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: \n";
   
-  if(!localStorage.getItem("P")){
+  if(!localStorage.getItem("P")||localStorage.getItem("P")==""){
   	document.getElementById("txt").value=Default;
     localStorage.setItem("P")=Default;
   }else{
