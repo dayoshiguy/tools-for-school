@@ -9,7 +9,7 @@
   <script>  
   var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: \n";
   
-  if(localStorage.getItem("P") == ""){
+  if(!localStorage.getItem("P")){
   	document.getElementById("txt").value=Default;
     localStorage.setItem("P")=Default;
   }else{
@@ -22,9 +22,7 @@
   	localStorage.setItem("P",txt);//set cookie to innerHTML of textArea, expires in 1 day
   }
   //when page closed/reloaded
-  window.onbeforeunload = function(){
-   localStorage.setItem("P",txt);//update cookie when page is closed https://stackoverflow.com/a/13443562
-	}
+  window.addEventListener('beforeunload', save);
   </script>
   
     </body>
