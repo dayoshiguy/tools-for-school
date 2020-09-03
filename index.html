@@ -3,18 +3,33 @@
 #time {
   font-size: 14px; color: #999999; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
 }
+/*two collumns https://www.w3schools.com/howto/howto_css_two_columns.asp*/
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%;
+  padding: 10px;
+}
 </style>
     <head>
         <meta charset="utf-8">
         <title>epic</title>
     </head>
     <body>
+        <div class="row">
+            <div class="column">
           <button type="button" id="switch" onclick="if(day=='A'){day='B';}else{day='A';}">Switch day</button>
 <button type="button" id="aday" onclick="setDay('a');">A day</button>
 <button type="button" id="bday" onclick="setDay('b');">B day</button>
 <button type="button" id="closeall" onclick="closeChildWindows();">Close All Popups</button>
         <pre id="time"></pre>
 <pre id="pre"></pre>
+            </div>
+        <div class="column">
+        <textarea id="txt" rows="4" cols="50" oninput="save();"></textarea>
+            </div>
+            </div>
 <script>
 //Current Time and Time Left
 var day="A";
@@ -113,8 +128,24 @@ function setDay(day){
     }
   }
 }
-
-
+////////////////////////////homework agenda/////////////////////////// 
+  var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: \n";
+  
+  if(!localStorage.getItem("P")||localStorage.getItem("P")==""){
+  	document.getElementById("txt").value=Default;
+    localStorage.setItem("P")=Default;
+  }else{
+  	document.getElementById("txt").value=localStorage.getItem("P");
+  }
+  //update cookie (called when typed)
+  function save(){
+  	var txt=document.getElementById("txt").value;
+    //txt=txt.replace(/\r\n|\r|\n/g,"</br>");
+  	localStorage.setItem("P",txt);//set cookie to innerHTML of textArea, expires in 1 day
+  }
+  //when page closed/reloaded
+  window.addEventListener('beforeunload', save);
+/////////////////////////////////////////////////////////////////////////////////
 </script>
     </body>
 </html>
