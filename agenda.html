@@ -5,47 +5,25 @@
         <title>le epic web page</title>
     </head>
     <body><!--&#13;&#10; = "\n"-->
-<textarea id="txt" rows="4" cols="50"></textarea>
-  <script>
-  //these two functions taken from w3schools bc i cba
-  function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-	}
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-	}
-  
+<textarea id="txt" rows="4" cols="50" oninput="save();"></textarea>
+  <script>  
   var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: \n";
   
   //check cookie and make it cookie if not blank
-  if(getCookie("P") == ""||getCookie("P")=="[object HTMLTextAreaElement]"){
-  	document.getElementById("txt").innerHTML=Default;
+  if(localStorage.getItem("P") == ""||localStorage.getItem("P")=="[object HTMLTextAreaElement]"){
+  	document.getElementById("txt").value=Default;
   }else{
-  	document.getElementById("txt").innerHTML=getCookie("P");
+  	document.getElementById("txt").value=localStorage.getItem("P");
   }
-  //regularly update cookie (every minute)
-  setInterval(function(){
+  //update cookie (called when typed)
+  function save(){
   	var txt=document.getElementById("txt").value;
-    txt=txt.replace(/\r\n|\r|\n/g,"</br>");
-  	setCookie("P",txt,30);//set cookie to innerHTML of textArea, expires in 1 day
-  },1000);
+    //txt=txt.replace(/\r\n|\r|\n/g,"</br>");
+  	localStorage.setItem("P",txt);//set cookie to innerHTML of textArea, expires in 1 day
+  }
+  //when page closed/reloaded
   window.onbeforeunload = function(){
-   setCookie("P",txt,30);//update cookie when page is closed https://stackoverflow.com/a/13443562
+   localStorage.setItem("P",txt);//update cookie when page is closed https://stackoverflow.com/a/13443562
 	}
   </script>
   
