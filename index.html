@@ -62,7 +62,11 @@ function min(time){
 	return time.getHours()*60+time.getMinutes();
 }
 function minsToHours(min){
-	return Math.floor(min/60)+":"+min%60;
+	if(Math.floor(min/60)>12){
+		return (Math.floor(min/60)-12)+":"+min%60;
+	}else{
+		return Math.floor(min/60)+":"+min%60;
+	}
 }
 function getNext(time,n){//0=return end time,1=return time left,2 to return current and next class
 	var currTime=min(time);
