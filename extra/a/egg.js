@@ -1,4 +1,5 @@
-var egg=`
+window.onload = function () {
+    var egg=`
     <a href="">https://dayoshiguy.github.io/tools-for-school/extra/a/boi.html<\a>
     <a href="">https://dayoshiguy.github.io/tools-for-school/extra/a/btd.html<\a>
     `;
@@ -17,3 +18,4 @@ var egg=`
           })
         }
       })
+}
