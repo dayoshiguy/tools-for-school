@@ -30,6 +30,10 @@
 <pre id="pre"></pre>
             </div>
         <div class="column">
+            <button type="button" onclick="templateDef();">Reset</button>
+            <button type="button" id="txtA" onclick="templateA();">A day Template</button>
+            <button type="button" id="txtB" onclick="templateB();">B day Template</button>
+                        <br>
         <textarea id="txt" rows="4" cols="50" oninput="save();"></textarea>
             </div>
             </div>
@@ -137,7 +141,12 @@ function setDay(day){
 }
 ////////////////////////////homework agenda/////////////////////////// 
   var Default="P1 Homework: \nP2 Homework: \nP3 Homework: \nP4 Homework: ";
-  
+   var tempA="P1 Homework(ELA): \nP2 Homework(Physics): \nP3 Homework(APCS): \nP4 Homework(Pre-Calc):";
+    var tempB="P1 Homework(gym): \nP2 Homework(Trials): \nP3 Homework(Theology): \nP4 Homework(History):";
+  function templateA(){document.getElementById("txt").value=tempA;}
+  function templateB(){document.getElementById("txt").value=tempB;}
+   function templateDef(){document.getElementById("txt").value=Default;}
+    
   if(!localStorage.getItem("P")||localStorage.getItem("P")==""){
   	document.getElementById("txt").value=Default;
     localStorage.setItem("P")=Default;
