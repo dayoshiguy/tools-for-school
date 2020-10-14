@@ -12,9 +12,10 @@
     EJS_mouse = false; // SNES Mouse
     EJS_multitap = false; // SNES Multitap
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  var s = document.createElement( 'script' );
-  s.setAttribute( 'src', "https://raw.githubusercontent.com/dayoshiguy/tools-for-school/master/extra/a/emulated/emulatorjs-adblock.js" );
-  document.body.appendChild( s );
+        //https://raw.githubusercontent.com/dayoshiguy/tools-for-school/master/extra/a/emulated/emulatorjs-adblock.js
+        setTimeout(function(){
+        $("html>body>div:eq(0)>div>div:eq(5)>div>div:eq(0)").remove();
+        },1000);
 </script>
 <script src="https://www.emulatorjs.com/loader.js"></script>
 </body>
