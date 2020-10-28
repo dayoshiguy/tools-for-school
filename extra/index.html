@@ -4,11 +4,11 @@
       (async () => {
         const response = await fetch('https://api.github.com/repos/dayoshiguy/tools-for-school/contents/extra');
         const data = await response.json();
-        let htmlString = '<ul>';
+        let htmlString = '';
         for (let file of data) {
-          htmlString += `<a href="https://dayoshiguy.github.io/tools-for-school/${file.path}">${file.name}</a>`;
+          htmlString += `<a href="https://dayoshiguy.github.io/tools-for-school/${file.path}">${file.name}</a></br>`;
         }
-        htmlString += '</ul>';
+        htmlString += '';
         document.getElementsByTagName('body')[0].innerHTML = htmlString;
       })()
     </script>
