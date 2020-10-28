@@ -1,0 +1,89 @@
+<html>
+  <style>
+    image {
+      margin: 0;
+      padding: 0;
+    }
+
+    .imgbox {
+      display: grid;
+      height: 100%;
+    }
+
+    .center-fit {
+      max-width: 100%;
+      max-height: 100vh;
+      margin: auto;
+    }
+    }
+
+  </style>
+
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+    <script src="https://idmnyu.github.io/p5.js-speech/lib/p5.speech.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="imgbox"></div>
+    <img id="image" class="center-fit">
+    <script>
+      function loadimage(image) {
+        var domparser = new DOMParser();
+        $.ajax({
+          url: "https://cors-anywhere.herokuapp.com/https://www.google.com.ua/search?source=lnms&sa=X&gbv=1&tbm=isch&q=" + image,
+          success: function(result) {
+
+            domparser = domparser.parseFromString(result, "text/html");
+            // Gets DOM element with image results
+            let image = domparser.getElementsByTagName("img")[1].src;
+            //document.write(image);
+            document.getElementById("image").src = image;
+
+          }
+        });
+      }
+
+      //////////////////////////////////////////
+
+      var myRec = new p5.SpeechRec(); // new P5.SpeechRec object
+      myRec.continuous = true; // do continuous recognition
+      myRec.interimResults = true; // allow partial recognition (faster, less accurate)
+      let image;
+
+      function preload() {
+
+      }
+
+      function setup() {
+        // graphics stuff:
+        createCanvas(800, 50);
+        background(255, 255, 255);
+        fill(0, 0, 0, 255);
+        // instructions:
+        textSize(32);
+        textAlign(CENTER);
+        text("say something", width / 2, height / 2);
+        myRec.onResult = showResult;
+        myRec.start();
+      }
+
+      function draw() {
+        // why draw when you can talk?
+      }
+
+      function showResult() {
+        if (myRec.resultValue == true) {
+          background(192, 255, 192);
+          text(myRec.resultString, width / 2, height / 2);
+          console.log(myRec.resultString);
+          loadimage(myRec.resultString);
+        }
+      }
+
+    </script>
+  </body>
+
+</html>
