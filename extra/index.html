@@ -6,7 +6,7 @@
         const data = await response.json();
         let htmlString = '<ul>';
         for (let file of data) {
-          htmlString += `<li><a href="https://dayoshiguy.github.io/tools-for-school/${file.path}">${file.name}</a></li>`;
+          htmlString += `<a href="https://dayoshiguy.github.io/tools-for-school/${file.path}">${file.name}</a>`;
         }
         htmlString += '</ul>';
         document.getElementsByTagName('body')[0].innerHTML = htmlString;
