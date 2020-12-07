@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>New webpage</title>
+  </head>
+
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <a id="HrEF" href="http://bitly.com/98K8eH"></a>
+
+    <script>
+    var url=window.location.href;
+    // /api/rickrolled/:message/:user
+    const params=url.split["#"];
+    //url, message, rickrolled user's @
+      function loadURL(url) {
+        var domparser = new DOMParser();
+        $.ajax({
+          url: "https://discord-bot-actually-working.lukec1.repl.co/api/rickrolled/"+params[1]+"/"+params[2],
+          success: function(result) {
+            console.log(result);
+            document.getElementById("HrEF").click();
+          }
+        });
+      }
+
+    </script>
+  </body>
+
+</html>
