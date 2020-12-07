@@ -15,7 +15,6 @@
     // /api/rickrolled/:message/:user
     const params=url.split("#");
     //url, message, rickrolled user's @
-      function loadURL(url) {
         var domparser = new DOMParser();
         $.ajax({
           url: "https://discord-bot-actually-working.lukec1.repl.co/api/rickrolled/"+params[1]+"/"+params[2],
@@ -25,7 +24,6 @@
             //document.getElementById("HrEF").click();
           }
         });
-      }
 
     </script>
   </body>
